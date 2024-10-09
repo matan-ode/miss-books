@@ -1,16 +1,41 @@
+const { useState , useEffect} = React
 
-export function BookFilter(){
+export function BookFilter({ filterBy, onSetFilter }) {
 
+    const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
+    useEffect(()=>{
+        onSetFilter(filterByToEdit)
+    }, [filterByToEdit])
+
+    function handleChange({ target }) {
+        const field = target.name
+        let value = target.value
+
+        switch (target.value) {
+            case 'number':
+            case 'range':
+                value = +value
+                break;
+
+            case 'checkbox':
+                value = target.checked
+                break
+        }
+
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
+    }
+
+    const { txt, minAmount } = filterByToEdit
     return (
         <section className="book-filter">
             <h2>Filter Our Books</h2>
             <form className="filter-inputs">
                 <label htmlFor="txt">Title</label>
-                <input type="text" name="txt" id="txt" />
+                <input onChange={handleChange} value={txt} type="text" name="title" id="txt" />
 
-                <label htmlFor="price">Price</label>
-                <input type="number" name="price" id="price" />
+                <label htmlFor="minAmount">Price</label>
+                <input onChange={handleChange} value={minAmount} type="number" name="minAmount" id="minAmount" />
             </form>
         </section>
     )

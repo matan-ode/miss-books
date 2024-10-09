@@ -10,20 +10,20 @@ export const bookService = {
     get,
     remove,
     save,
-    getEmptyCar: getEmptyBook,
+    getEmptyBook,
     getDefaultFilter,
 }
 
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
         .then(books => {
-            // if (filterBy.txt) {
-            //     const regExp = new RegExp(filterBy.txt, 'i')
-            //     cars = cars.filter(car => regExp.test(car.vendor))
-            // }
-            // if (filterBy.minSpeed) {
-            //     cars = cars.filter(car => car.speed >= filterBy.minSpeed)
-            // }
+            if (filterBy.title) {
+                const regExp = new RegExp(filterBy.title, 'i')
+                books = books.filter(book => regExp.test(book.title))
+            }
+            if (filterBy.minAmount) {
+                books = books.filter(book => book.listPrice.amount >= filterBy.minAmount)
+            }
             
             return books
         })
