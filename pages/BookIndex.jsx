@@ -1,4 +1,5 @@
 
+import { BookFilter } from "../cmps/BookFilter.jsx";
 import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";
 import { BookDetails } from "./BookDetalis.jsx";
@@ -46,7 +47,10 @@ export function BookIndex() {
     return (
         <section className="book-index">
             {!selectedBookId ?
-                <BookList onSelectBookId={onSelectBookId} onRemoveBook={onRemoveBook} books={books} />
+                <React.Fragment>
+                    <BookFilter />
+                    <BookList onSelectBookId={onSelectBookId} onRemoveBook={onRemoveBook} books={books} />
+                </React.Fragment>
                 : <BookDetails onBack={() => setSelectedBookId(null)} bookId={selectedBookId} />
             }
         </section>

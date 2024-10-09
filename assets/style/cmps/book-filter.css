@@ -1,0 +1,30 @@
+.book-filter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    background-color: var(--clr3);
+    padding: 1em;
+    margin-top: 1.5em;
+
+    border-radius: 2em;
+}
+
+.book-filter input{
+    border-radius: 2em;
+    /* margin-left: 0.5em; */
+}
+
+.filter-inputs{
+    display: flex;
+    gap:20px;
+
+    font-size: 1.5em;
+
+    margin-right: 1em;
+}
+
+.book-filter h2{
+    margin-left: 1em;
+    font-size: 1.8em;
+}
