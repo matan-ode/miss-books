@@ -8,6 +8,7 @@ html {
 body {
   margin: 0;
   color: var(--gray3);
+  background-color: var(--clr1bg);
 }
 
 h1,
