@@ -59,3 +59,8 @@
 .on-sale{
     background-color: red;
 }
+
+.hide{
+    display: none;
+    opacity: 0;
+}
