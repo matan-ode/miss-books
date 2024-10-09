@@ -1,3 +1,5 @@
+// import {storageServiceLocal} from '/'
+
 export const storageService = {
     query,
     get,
@@ -7,7 +9,7 @@ export const storageService = {
 }
 
 function query(entityType, delay = 200) {
-    var entities = JSON.parse(localStorage.getItem(entityType)) || []
+    var entities = JSON.parse(localStorage.getItem(entityType)) || []    
     return new Promise(resolve => setTimeout(() => resolve(entities), delay))
 }
 

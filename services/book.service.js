@@ -16,7 +16,7 @@ export const bookService = {
 
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
-        .then(cars => {
+        .then(books => {
             // if (filterBy.txt) {
             //     const regExp = new RegExp(filterBy.txt, 'i')
             //     cars = cars.filter(car => regExp.test(car.vendor))
@@ -24,7 +24,8 @@ function query(filterBy = {}) {
             // if (filterBy.minSpeed) {
             //     cars = cars.filter(car => car.speed >= filterBy.minSpeed)
             // }
-            return cars
+            
+            return books
         })
 }
 
@@ -65,6 +66,9 @@ function _createBooks() {
         books = booksDB.getBooks()
         saveToStorage(BOOK_KEY, books)
     }
+
+    console.log(books);
+    
 
     //     books = [
     //         _createBook('audu', 300),

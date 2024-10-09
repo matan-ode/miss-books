@@ -1,0 +1,27 @@
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: center;
+    text-align: center;
+
+    background-color: var(--clr2);
+
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.book-card h1 {
+    font-size: 1.5em;
+}
+
+.book-preview {
+    justify-items: center;
+    justify-content: space-evenly;
+}
