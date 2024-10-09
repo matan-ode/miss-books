@@ -47,6 +47,8 @@ export function BookIndex() {
         setSelectedBookId(bookId)
     }
 
+
+
     if (!books) return <div>Loading...</div>
 
     return (

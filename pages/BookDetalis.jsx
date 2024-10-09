@@ -1,3 +1,4 @@
+import { LongTxt } from '../cmps/LongTxt.jsx';
 import { bookService } from '../services/book.service.js';
 
 const { useState, useEffect } = React
@@ -39,19 +40,26 @@ export function BookDetails({ bookId, onBack }) {
         if (listPrice.amount < 20) return 'green'
     }
 
-    const onSale = listPrice.isOnSale? '' : 'hide'
+    const onSale = listPrice.isOnSale ? '' : 'hide'
 
     return (
         <section className="book-details">
-            <h1>Book Title: {title}</h1>
-            <img src={thumbnail} alt="Book Cover" />
-            <div className={`${onSale} sale-tag`}>For SALE!</div>
-            <h1>Book Description:</h1>
-            <p>{description}</p>
-            <p>{pageCountStr()}</p>
-            <p>{publishedDateStr()}</p>
-            <p className={checkAmount()}>{listPrice.amount} {listPrice.currencyCode}</p>
-            <button onClick={onBack}>Back</button>
+            <div className="details-first">
+                <h1>Book Title: {title}</h1>
+                <img src={thumbnail} alt="Book Cover" />
+            </div>
+            <br />
+            <div className="details-second">
+                <div className={`${onSale} sale-tag`}>For SALE!</div>
+                <h1>Book Description:</h1>
+                <LongTxt txt={description} />
+                {/* <p>{description}</p> */}
+                <h4>{pageCountStr()}</h4>
+                <h4>{publishedDateStr()}</h4>
+                <h4 className={checkAmount()}>{listPrice.amount} {listPrice.currencyCode}</h4>
+                <button onClick={onBack}>Back</button>
+            </div>
+            <br />
         </section>
     )
 }

@@ -1,0 +1,270 @@
+/* Mobile Only */
+@media (max-width: 640px) {
+
+    /* BOOK LIST */
+    .book-list {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    ul.book-list {
+        padding-inline-start: 0px;
+
+    }
+
+    .book-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        justify-items: center;
+        text-align: center;
+
+        background-color: var(--clr2);
+
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    .book-card h1 {
+        font-size: 1.5em;
+    }
+
+    .book-preview {
+        justify-items: center;
+        justify-content: space-evenly;
+    }
+
+    .book-filter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        background-color: var(--clr3);
+        padding: 1em;
+        margin-top: 1.5em;
+
+        border-radius: 2em;
+    }
+
+    .book-filter input {
+        border-radius: 2em;
+        width: 300px;
+        /* margin-left: 0.5em; */
+    }
+
+    .filter-inputs {
+        display: flex;
+        gap: 20px;
+
+        font-size: 1.5em;
+
+        margin-right: 1em;
+    }
+
+    .book-filter h2 {
+        font-size: 1.8em;
+    }
+
+
+    /* BOOK FILTER */
+
+    .book-filter {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        background-color: var(--clr3);
+        padding: 1em;
+        margin-top: 1.5em;
+
+        border-radius: 2em;
+    }
+
+    .book-filter input {
+        border-radius: 2em;
+        width: 250px;
+        /* margin-left: 0.5em; */
+        height: 2em;
+
+    }
+
+    .filter-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        text-align: center;
+
+        font-size: 1.5em;
+
+        margin-right: 1em;
+
+
+    }
+
+    .book-filter h2 {
+        /* margin-left: 1em; */
+        font-size: 1.8em;
+
+    }
+
+    .book-details>* {
+        text-align: center;
+    }
+
+    .details-second>* {
+        text-align: center;
+    }
+
+    .sale-tag {
+        display: grid;
+        align-items: center;
+        text-align: center;
+
+        position: absolute;
+
+        background-color: red;
+        font-weight: bold;
+        color: white;
+        font-size: 1em;
+
+        width: 4em;
+        height: 4em;
+        border-radius: 50%;
+
+        top: 80px;
+        left: -10px;
+    }
+
+}
+
+
+
+/* Small */
+@media (min-width: 640px) {
+
+    /* BOOK LIST */
+    .book-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    /* BOOK FILTER */
+
+    .book-filter {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        background-color: var(--clr3);
+        padding: 1em;
+        margin-top: 1.5em;
+
+        border-radius: 2em;
+    }
+
+    .book-filter input {
+        border-radius: 2em;
+        width: 500px;
+        /* margin-left: 0.5em; */
+    }
+
+    .filter-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        text-align: center;
+
+        font-size: 1.5em;
+
+        margin-right: 1em;
+    }
+
+    .book-filter h2 {
+        /* margin-left: 1em; */
+        font-size: 1.8em;
+    }
+
+    /* BOOK DETAILS */
+    .book-details>* {
+        text-align: center;
+    }
+
+    .book-details {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+        gap: 2em;
+    }
+
+    .details-second {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .sale-tag {
+        top: 80px;
+        left: -10px;
+    }
+}
+
+
+/* Medium */
+@media (min-width: 870px) {
+    .book-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+
+    }
+
+    ul.book-list {
+        padding-inline-start: 0px;
+
+    }
+
+    .book-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        justify-items: center;
+        text-align: center;
+
+        background-color: var(--clr2);
+
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    .book-card h1 {
+        font-size: 1.5em;
+    }
+
+    .book-preview {
+        justify-items: center;
+        justify-content: space-evenly;
+    }
+
+    .book-filter {
+        flex-direction: row;
+    }
+
+    .filter-inputs {
+        flex-direction: row;
+    }
+
+    .book-filter input {
+        width: 150px;
+        max-height: 2em;
+    }
+
+}
+
+
+/* Large */
+@media (min-width: 1040px) {}
