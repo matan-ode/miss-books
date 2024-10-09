@@ -1,14 +1,26 @@
-import {bookService} from "../services/book.service.js"
+import { bookService } from "../services/book.service.js"
+import { BookFilter } from "../cmps/BookFilter.jsx"
+import { BookList } from "../cmps/BookList.jsx"
+import { BookDetails } from "./BookDetails.jsx"
+
+const { useState, useEffect } = React
 
 export function BookIndex() {
 
-    bookService.query()
+    const [books, setBooks] = useState(null)
+
+    useEffect(() => {
+        loadBooks()
+    }, [])
+
+    function loadBooks() {
+        bookService.query()
+            .then(setBooks)
+    }
 
     return (
         <section className="book-index">
-            <h1>About books and us!</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores rerum similique vel quasi consequatur incidunt quidem aspernatur ducimus qui. Autem est fugiat repellat perferendis. Id debitis consectetur accusantium molestias ab.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores rerum similique vel quasi consequatur incidunt quidem aspernatur ducimus qui. Autem est fugiat repellat perferendis. Id debitis consectetur accusantium molestias ab.</p>
+            <BookList books={books} />
         </section>
     )
 }

@@ -1,4 +1,4 @@
-import { BooksPreview } from '../cmps/BooksPreview.jsx'
+import { BooksPreview } from '../cmps/BookPreview.jsx'
 
 export function HomePage() {
     return (
