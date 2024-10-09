@@ -1,0 +1,11 @@
+.about-us{
+    max-width: 700px;
+}
+
+.about-us h1{
+    text-align: center;
+}
+
+.about-us p{
+    text-align: justify;
+}

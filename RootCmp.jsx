@@ -1,13 +1,24 @@
-import { Home } from "./pages/Home.jsx"
+
+const { useState } = React
+
+import { AppHeader } from "./cmps/AppHeader.jsx"
+import { HomePage } from "./pages/HomePage.jsx"
+import { BookIndex } from "./pages/BookIndex.jsx"
+import { AboutUs } from "./pages/AboutUs.jsx"
 
 export function App() {
+
+    const [page, setPage] = useState('home')
+
     return (
         <section className="app">
-            <header className="app-header main-layout">
-                <h1>Miss Books</h1>
-            </header>
+            <AppHeader onSetPage={(page) => setPage(page)}/>
+                
             <main className="main-layout">
-                <Home />
+                {page === 'home' && <HomePage />}
+                {page === 'about' && <AboutUs />}
+                {page === 'books' && <BookIndex />}
+
             </main>
         </section>
     )

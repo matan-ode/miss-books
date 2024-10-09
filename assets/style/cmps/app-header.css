@@ -1,5 +1,15 @@
 .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     background-color: var(--clr1);
     color: var(--clr1bg);
     padding-block: 1em;
+}
+
+.app-nav{
+    display: flex;
+    gap: 20px;
+    font-size: 1.2em;
 }
