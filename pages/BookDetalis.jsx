@@ -12,14 +12,20 @@ export function BookDetails({ bookId, onBack }) {
             .then(setBook)
             .catch(err => {
                 console.log('Problem get book from service:', err);
-                
+
             })
     }, [])
 
-    if(!book) return <div>Loading...</div>
-console.log(book);
+    if (!book) return <div>Loading...</div>
+    console.log(book);
 
-    const {title, description, thumbnail} = book
+    const { title, description, thumbnail, pageCount } = book
+
+    function pageCountStr() {
+        if (pageCount > 500) return 'Serious Reading'
+        else if (pageCount > 200) return 'Decent Reading'
+        else return 'Light Reading'
+    }
 
     return (
         <section className="book-details">
@@ -27,6 +33,7 @@ console.log(book);
             <img src={thumbnail} alt="Book Cover" />
             <h1>Book Description:</h1>
             <p>{description}</p>
+            <p>{pageCountStr()}</p>
             <button onClick={onBack}>Back</button>
         </section>
     )
