@@ -58,3 +58,7 @@ object {
 .debug * {
   outline: 1px solid gold
 }
+
+input{
+  border-radius: 1em;
+}

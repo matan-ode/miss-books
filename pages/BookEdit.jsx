@@ -1,0 +1,81 @@
+const { useNavigate } = ReactRouterDOM
+
+const { useState } = React
+
+import { bookService } from "../services/book.service.js"
+
+export function BookEdit() {
+
+    const [bookToEdit, setBookToEdit] = useState(bookService.getEmptyBook())
+
+    const navigate = useNavigate()
+
+    function handleChange({ target }) {
+        const field = target.name
+        let value = target.value
+
+        switch (target.value) {
+            case 'number':
+            case 'range':
+                value = +value
+                break;
+
+            case 'checkbox':
+                value = target.checked
+                break
+        }
+
+        setBookToEdit(prevBook => ({ ...prevBook, [field]: value }))
+    }
+
+    function handleChangeAmount({ target }) {
+        const field = target.name
+        let value = target.value
+
+        switch (target.value) {
+            case 'number':
+            case 'range':
+                value = +value
+                break;
+
+            case 'checkbox':
+                value = target.checked
+                break
+        }
+
+        setBookToEdit(prevBook => ({ ...prevBook, listPrice: { ...bookToEdit.listPrice, [field]: value } }))
+    }
+
+    function onSaveBook(ev) {
+        ev.preventDefault()
+        bookService.save(bookToEdit)
+            .then(book => {
+                console.log('Book saved');
+            })
+            .catch(err => {
+                console.log('err:', err);
+
+            })
+            .finally(() => {
+                navigate('/book')
+            })
+    }
+
+
+    const { title, listPrice } = bookToEdit
+
+    return (
+        <section className="book-edit">
+            <h1>Edit Book</h1>
+            <form onSubmit={onSaveBook}>
+                <label htmlFor="title">Title</label>
+                <input onChange={handleChange} value={title} type="text" name="title" id="title" />
+
+                <label htmlFor="amount">Amount</label>
+                <input onChange={handleChangeAmount} value={listPrice.amount} type="number" name="amount" id="amount" />
+
+                <button>Save</button>
+            </form>
+        </section>
+    )
+}
