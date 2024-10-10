@@ -15,7 +15,7 @@ export function BookDetails() {
 
     useEffect(() => {
         loadBook()
-    }, [])
+    }, [bookId])
 
     function loadBook() {
         bookService.get(bookId)
@@ -76,6 +76,10 @@ export function BookDetails() {
                 <h4 className={checkAmount()}>{listPrice.amount} {listPrice.currencyCode}</h4>
                 <button onClick={onBack}>Back</button>
                 {/* <button ><Link to="/book">Back</Link></button> */}
+                <section>
+                    <button><Link to={`/book/${book.prevBookId}`}>Prev Book</Link></button>
+                    <button><Link to={`/book/${book.nextBookId}`}>Next Book</Link></button>
+                </section>
             </div>
             <br />
         </section>
