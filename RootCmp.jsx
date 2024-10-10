@@ -11,6 +11,7 @@ import { Goal } from "./cmps/Goal.jsx"
 import { Team } from "./cmps/Team.jsx"
 import { BookDetails } from "./pages/BookDetails.jsx"
 import { BookEdit } from "./pages/BookEdit.jsx"
+import { UserMsg } from "./cmps/UserMsg.jsx"
 
 export function App() {
 
@@ -34,8 +35,8 @@ export function App() {
                         <Route path="/book/edit/:bookId" element={<BookEdit />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
-
                 </main>
+                <UserMsg />
             </section>
         </Router>
     )

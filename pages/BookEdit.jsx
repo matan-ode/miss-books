@@ -60,10 +60,15 @@ export function BookEdit() {
         bookService.save(bookToEdit)
             .then(book => {
                 console.log('Book saved');
+                bookId? 
+                showSuccessMsg('Book edited successfully')
+                :showSuccessMsg('Book added successfully')
             })
             .catch(err => {
                 console.log('err:', err);
-
+                bookId? 
+                showErrorMsg('Problems editing book')
+                :showErrorMsg('Problems adding book')
             })
             .finally(() => {
                 navigate('/book')
