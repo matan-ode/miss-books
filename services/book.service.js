@@ -15,7 +15,8 @@ export const bookService = {
     getEmptyBook,
     getDefaultFilter,
     addReview,
-    getReviews
+    getReviews,
+    getGoogleBooks
 
 }
 
@@ -121,12 +122,63 @@ function getGoogleBooks(url) {
     if (values) return Promise.resolve(values)
 
     return axios.get(url).then(res => {
-        console.log('axios')
-        const values = res.data
-        saveToStorage(GOOGLE_KEY, values)
-        return values
+        const values = res.data.items
+        console.log(values);
+        
+        const valuesData = getPrepareData(values)
+        storageService.post(GOOGLE_KEY, valuesData)
+        console.log(valuesData)
+        return valuesData
     })
 }
+
+function getPrepareData( results ) {
+    console.log(results);
+    
+    return results.map((book) => {
+        return {
+            id: book.id,
+            title: book.volumeInfo.title,
+            subtitle: book.volumeInfo.subtitle,
+            authors: book.volumeInfo.authors,
+            publishedDate: book.volumeInfo.publishedDate,
+            description: book.volumeInfo.description,
+            pageCount: book.volumeInfo.pageCount,
+            categories: book.volumeInfo.categories,
+            thumbnail: book.volumeInfo.imageLinks.thumbnail,
+            language: book.volumeInfo.imageLinks.language,
+            listPrice: {amount:99, currencyCode: "EUR", isOnSale: checkIsSale(book.saleInfo.saleability) }
+        }
+    })
+}
+
+
+function checkIsSale(str){
+    if(str === 'NOT_FOR_SALE') return false
+    else return true
+}
+// {
+//     "id": "OXeMG8wNskc",
+//     "title": "metus hendrerit",
+//     "subtitle": "mi est eros convallis auctor arcu dapibus himenaeos",
+//     "authors": [
+//       "Barbara Cartland"
+//     ],
+//     "publishedDate": 2023,
+//     "description": "placerat nisi sodales suscipit tellus tincidunt mauris elit sit luctus interdum ad dictum platea vehicula conubia fermentum habitasse congue suspendisse",
+//     "pageCount": 713,
+//     "categories": [
+//       "Computers",
+//       "Hack"
+//     ],
+//     "thumbnail": "http://coding-academy.org/books-photos/20.jpg",
+//     "language": "en",
+//     "listPrice": {
+//       "amount": 109,
+//       "currencyCode": "EUR",
+//       "isOnSale": false
+//     }
+//   },
 
 function addGoogleBook(item) {
 
