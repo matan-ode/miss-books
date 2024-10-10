@@ -59,6 +59,6 @@ object {
   outline: 1px solid gold
 }
 
-input{
+input, select{
   border-radius: 1em;
 }

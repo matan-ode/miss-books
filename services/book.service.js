@@ -3,6 +3,8 @@ import { storageService } from './async-storage.service.js'
 import { booksDB } from './booksDB.service.js'
 
 const BOOK_KEY = 'bookDB'
+const REVIEWS_KEY = 'reviewsDB'
+const GOOGLE_KEY = 'googleDB'
 _createBooks()
 
 export const bookService = {
@@ -11,8 +13,10 @@ export const bookService = {
     remove,
     save,
     getEmptyBook,
-    getDefaultFilter
-    
+    getDefaultFilter,
+    addReview,
+    getReviews
+
 }
 
 function query(filterBy = {}) {
@@ -25,7 +29,7 @@ function query(filterBy = {}) {
             if (filterBy.minAmount) {
                 books = books.filter(book => book.listPrice.amount >= filterBy.minAmount)
             }
-            
+
             return books
         })
 }
@@ -69,7 +73,7 @@ function _createBooks() {
     }
 
     console.log(books);
-    
+
 
     //     books = [
     //         _createBook('audu', 300),
@@ -96,4 +100,34 @@ function _setNextPrevBookId(book) {
         book.prevBookId = prevBook.id
         return book
     })
+}
+
+function addReview(bookId, review) {
+    const newReviews = { bookId, ...review }
+    return storageService.post(REVIEWS_KEY, newReviews)
+}
+
+function getReviews(bookId) {
+    // return storageService.get(REVIEWS_KEY, bookId)
+    return storageService.query(REVIEWS_KEY)
+        .then(reviews => {
+            return reviews.filter(review => review.bookId === bookId)
+        })
+    // _queryReviews(bookId)
+}
+
+function getGoogleBooks(url) {
+    const values = loadFromStorage(GOOGLE_KEY)
+    if (values) return Promise.resolve(values)
+
+    return axios.get(url).then(res => {
+        console.log('axios')
+        const values = res.data
+        saveToStorage(GOOGLE_KEY, values)
+        return values
+    })
+}
+
+function addGoogleBook(item) {
+
 }

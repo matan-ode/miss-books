@@ -1,7 +1,9 @@
 const { Link, useNavigate, useParams } = ReactRouterDOM
 
 
+import { AddReview } from '../cmps/AddReview.jsx';
 import { LongTxt } from '../cmps/LongTxt.jsx';
+import { ReviewList } from '../cmps/ReviewList.jsx';
 import { bookService } from '../services/book.service.js';
 
 const { useState, useEffect } = React
@@ -28,7 +30,6 @@ export function BookDetails() {
 
 
     if (!book) return <div>Loading...</div>
-    console.log(book);
 
     const { title, description, thumbnail, pageCount, publishedDate, listPrice } = book
 
@@ -60,28 +61,34 @@ export function BookDetails() {
     const onSale = listPrice.isOnSale ? '' : 'hide'
 
     return (
-        <section className="book-details">
-            <div className="details-first">
-                <h1>Book Title: {title}</h1>
-                <img src={thumbnail} alt="Book Cover" />
-            </div>
-            <br />
-            <div className="details-second">
-                <div className={`${onSale} sale-tag`}>For SALE!</div>
-                <h1>Book Description:</h1>
-                <LongTxt txt={description} />
-                {/* <p>{description}</p> */}
-                <h4>{pageCountStr()}</h4>
-                <h4>{publishedDateStr()}</h4>
-                <h4 className={checkAmount()}>{listPrice.amount} {listPrice.currencyCode}</h4>
-                <button onClick={onBack}>Back</button>
-                {/* <button ><Link to="/book">Back</Link></button> */}
-                <section>
-                    <button><Link to={`/book/${book.prevBookId}`}>Prev Book</Link></button>
-                    <button><Link to={`/book/${book.nextBookId}`}>Next Book</Link></button>
-                </section>
-            </div>
-            <br />
-        </section>
+        <React.Fragment>
+            <section className="book-details">
+                <div className="details-first">
+                    <h1>Book Title: {title}</h1>
+                    <img src={thumbnail} alt="Book Cover" />
+                </div>
+                <br />
+                <div className="details-second">
+                    <div className={`${onSale} sale-tag`}>For SALE!</div>
+                    <h1>Book Description:</h1>
+                    <LongTxt txt={description} />
+                    {/* <p>{description}</p> */}
+                    <h4>{pageCountStr()}</h4>
+                    <h4>{publishedDateStr()}</h4>
+                    <h4 className={checkAmount()}>{listPrice.amount} {listPrice.currencyCode}</h4>
+                    <button onClick={onBack}>Back</button>
+                    {/* <button ><Link to="/book">Back</Link></button> */}
+                    <section>
+                        <button><Link to={`/book/${book.prevBookId}`}>Prev Book</Link></button>
+                        <button><Link to={`/book/${book.nextBookId}`}>Next Book</Link></button>
+                    </section>
+                </div>
+                <div className="review-add-container">
+                    <AddReview />
+                </div>
+                <br />
+                <ReviewList />
+            </section>
+        </React.Fragment>
     )
 }

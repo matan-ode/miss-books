@@ -1,3 +1,4 @@
+const { Link, NavLink, useParams, useNavigate } = ReactRouterDOM
 
 const { useState, useEffect } = React
 
@@ -6,9 +7,12 @@ export function LongTxt({ txt, length = 100 }) {
 
     const [shortString, setShortString] = useState('')
     const [isLong, setIsLong] = useState(false)
+    const navigate = useNavigate()
+    const { bookId } = useParams()
 
     useEffect(() => {
         toChangeTxtLength(txt)
+        navigate(`/book/${bookId}`)
     }, [isLong])
 
     // useEffect(() => {
@@ -32,7 +36,8 @@ export function LongTxt({ txt, length = 100 }) {
 
     return (
         <article>
-            <p>{shortString} <a className="more-less" href="#" onClick={onReadMoreLess}>{readBtn}</a></p>
+            <p>{shortString} <a className="more-less"  onClick={onReadMoreLess}>{readBtn}</a></p>
+            {/* href={`#/book/${bookId}`} */}
         </article>
     )
 }
