@@ -9,3 +9,22 @@
 .about-us p{
     text-align: justify;
 }
+
+.about-us a{
+    padding: 0.5em;
+    margin-left: 1em;
+    font-weight: bold;
+    border-radius: 1em;
+    background-color: var(--clr3);
+    border: 1.5px var(--clr3) solid;
+    transition: 300ms;
+}
+
+.about-us a:hover{
+    opacity: 0.8;
+
+}
+
+.about-us nav{
+    text-align: center;
+}

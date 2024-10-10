@@ -1,21 +1,31 @@
+const { Link, useNavigate, useParams } = ReactRouterDOM
+
+
 import { LongTxt } from '../cmps/LongTxt.jsx';
 import { bookService } from '../services/book.service.js';
 
 const { useState, useEffect } = React
 
 
-export function BookDetails({ bookId, onBack }) {
+export function BookDetails() {
 
     const [book, setBook] = useState(null)
+    const { bookId } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
+        loadBook()
+    }, [])
+
+    function loadBook() {
         bookService.get(bookId)
             .then(setBook)
             .catch(err => {
                 console.log('Problem get book from service:', err);
 
             })
-    }, [])
+    }
+
 
     if (!book) return <div>Loading...</div>
     console.log(book);
@@ -40,6 +50,13 @@ export function BookDetails({ bookId, onBack }) {
         if (listPrice.amount < 20) return 'green'
     }
 
+
+    function onBack() {
+        navigate('/book')
+    }
+
+    if (!book) return <div>Loading...</div>
+
     const onSale = listPrice.isOnSale ? '' : 'hide'
 
     return (
@@ -58,6 +75,7 @@ export function BookDetails({ bookId, onBack }) {
                 <h4>{publishedDateStr()}</h4>
                 <h4 className={checkAmount()}>{listPrice.amount} {listPrice.currencyCode}</h4>
                 <button onClick={onBack}>Back</button>
+                {/* <button ><Link to="/book">Back</Link></button> */}
             </div>
             <br />
         </section>

@@ -1,22 +1,22 @@
 /* flex helpers */
 
 .flex {
-  display: flex;
+    display: flex;
 }
 
-.flex.flex-column{
+.flex.flex-column {
     flex-direction: column;
 }
 
-.flex.justify-center{
+.flex.justify-center {
     justify-content: center;
 }
 
-.flex.justify-between{
+.flex.justify-between {
     justify-content: space-between;
 }
 
-.flex.align-center{
+.flex.align-center {
     align-items: center;
 }
 
@@ -56,11 +56,17 @@
     content: "\f1b4";
 }
 
-.on-sale{
+.on-sale {
     background-color: red;
 }
 
-.hide{
+.hide {
     display: none;
     opacity: 0;
+}
+
+a.active {
+    /* color: var(--clr3); */
+    font-weight: 550;
+    border-bottom: var(--clr3) solid 2px;
 }

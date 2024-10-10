@@ -31,3 +31,11 @@ ul.book-list {
     justify-items: center;
     justify-content: space-evenly;
 }
+
+.book-card button{
+    cursor: pointer;
+}
+
+.book-card a{
+    /* padding: 7px 10px; */
+}
