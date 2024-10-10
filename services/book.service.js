@@ -118,13 +118,23 @@ function getReviews(bookId) {
 }
 
 function getGoogleBooks(url) {
-    const values = loadFromStorage(GOOGLE_KEY)
-    if (values) return Promise.resolve(values)
+    const values = storageService.query(GOOGLE_KEY)
+        .then(books => {
+            if (books) return books
+        })
+        .then(() => {
+
+            if (values) return values
+        }
+        )
+    console.log(values);
+
+    // if (values) return Promise.resolve(values)
 
     return axios.get(url).then(res => {
         const values = res.data.items
         console.log(values);
-        
+
         const valuesData = getPrepareData(values)
         storageService.post(GOOGLE_KEY, valuesData)
         console.log(valuesData)
@@ -132,9 +142,9 @@ function getGoogleBooks(url) {
     })
 }
 
-function getPrepareData( results ) {
+function getPrepareData(results) {
     console.log(results);
-    
+
     return results.map((book) => {
         return {
             id: book.id,
@@ -145,16 +155,16 @@ function getPrepareData( results ) {
             description: book.volumeInfo.description,
             pageCount: book.volumeInfo.pageCount,
             categories: book.volumeInfo.categories,
-            thumbnail: book.volumeInfo.imageLinks.thumbnail,
-            language: book.volumeInfo.imageLinks.language,
-            listPrice: {amount:99, currencyCode: "EUR", isOnSale: checkIsSale(book.saleInfo.saleability) }
+            // thumbnail: book.volumeInfo.imageLinks.thumbnail || book.volumeInfo.imageLinks.smallThumbnail,
+            language: book.volumeInfo.language,
+            listPrice: { amount: 99, currencyCode: "EUR", isOnSale: checkIsSale(book.saleInfo.saleability) }
         }
     })
 }
 
 
-function checkIsSale(str){
-    if(str === 'NOT_FOR_SALE') return false
+function checkIsSale(str) {
+    if (str === 'NOT_FOR_SALE') return false
     else return true
 }
 // {

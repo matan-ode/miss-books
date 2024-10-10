@@ -1,3 +1,4 @@
+import { LongTxt } from "../cmps/LongTxt.jsx"
 import { bookService } from "../services/book.service.js"
 const { useState, useEffect } = React
 
@@ -44,17 +45,26 @@ export function BookAdd() {
         setSearch(prevSearch => ({ ...prevSearch, [field]: value }))
     }
 
+
+    const { newSearch } = search
+    console.log(results);
     if (!results) return <div>Loading...</div>
 
     return (
         <section>
             <h1>Add Book</h1>
-            <input onChange={handleChange} type="text" name="search" id="search" />
-            <select name="results" id="results">
-                {/* {results.map(result =>
-                    <option value={result}>{result}</option>
-                )} */}
-            </select>
+            <input onChange={handleChange} value={newSearch} type="text" name="search" id="search" />
+            {/* <select name="results" id="results"> */}
+            {results.map(result =>
+                // <option value={result.title}>{result.title}</option>
+                <div>
+                    <p>{result.title}</p>
+                    <button>+</button>
+                </div>
+                // <LongTxt txt={`${result.title}`} length={10} />
+
+            )}
+            {/* </select> */}
         </section>
     )
 }
