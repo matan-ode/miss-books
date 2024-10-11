@@ -5,6 +5,8 @@ import { booksDB } from './booksDB.service.js'
 const BOOK_KEY = 'bookDB'
 const REVIEWS_KEY = 'reviewsDB'
 const GOOGLE_KEY = 'googleDB'
+
+
 _createBooks()
 
 export const bookService = {
@@ -110,12 +112,10 @@ function addReview(bookId, review) {
 }
 
 function getReviews(bookId) {
-    // return storageService.get(REVIEWS_KEY, bookId)
     return storageService.query(REVIEWS_KEY)
         .then(reviews => {
             return reviews.filter(review => review.bookId === bookId)
         })
-    // _queryReviews(bookId)
 }
 
 function addGoogleBook(item) {
@@ -127,34 +127,9 @@ function addGoogleBook(item) {
             return storageService.post(BOOK_KEY, item)
         }
     })
-    
-    // get(item.id)
-        // .then(book)
-        // .then(book => {
-
-        // })
-        //         return
-        //     }else{
-        //         return storageService.post(BOOK_KEY, item)
-
-        //     }
-        // })
 }
 
 function getGoogleBooks(url) {
-    // storageService.post(BOOK_KEY, {})
-    // const values = storageService.query(GOOGLE_KEY)
-    //     .then(books => {
-    //         if (books) return books
-    //     })
-    //     .then(() => {
-
-    //         if (values) return values
-    //     }
-    //     )
-    // console.log(values);
-
-    // if (values) return Promise.resolve(values)
 
     return axios.get(url).then(res => {
         const values = res.data.items
@@ -194,26 +169,3 @@ function checkIsSale(str) {
     if (str === 'NOT_FOR_SALE') return false
     else return true
 }
-// {
-//     "id": "OXeMG8wNskc",
-//     "title": "metus hendrerit",
-//     "subtitle": "mi est eros convallis auctor arcu dapibus himenaeos",
-//     "authors": [
-//       "Barbara Cartland"
-//     ],
-//     "publishedDate": 2023,
-//     "description": "placerat nisi sodales suscipit tellus tincidunt mauris elit sit luctus interdum ad dictum platea vehicula conubia fermentum habitasse congue suspendisse",
-//     "pageCount": 713,
-//     "categories": [
-//       "Computers",
-//       "Hack"
-//     ],
-//     "thumbnail": "http://coding-academy.org/books-photos/20.jpg",
-//     "language": "en",
-//     "listPrice": {
-//       "amount": 109,
-//       "currencyCode": "EUR",
-//       "isOnSale": false
-//     }
-//   },
-
