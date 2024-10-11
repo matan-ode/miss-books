@@ -16,7 +16,8 @@ export const bookService = {
     getDefaultFilter,
     addReview,
     getReviews,
-    getGoogleBooks
+    getGoogleBooks,
+    addGoogleBook
 
 }
 
@@ -117,17 +118,41 @@ function getReviews(bookId) {
     // _queryReviews(bookId)
 }
 
-function getGoogleBooks(url) {
-    const values = storageService.query(GOOGLE_KEY)
-        .then(books => {
-            if (books) return books
-        })
-        .then(() => {
-
-            if (values) return values
+function addGoogleBook(item) {
+    query().then((books) => {
+        if(books.find(book => book.id === item.id)){
+            return console.log('err:', err);
+        }else{
+            console.log('Google book added');
+            return storageService.post(BOOK_KEY, item)
         }
-        )
-    console.log(values);
+    })
+    
+    // get(item.id)
+        // .then(book)
+        // .then(book => {
+
+        // })
+        //         return
+        //     }else{
+        //         return storageService.post(BOOK_KEY, item)
+
+        //     }
+        // })
+}
+
+function getGoogleBooks(url) {
+    // storageService.post(BOOK_KEY, {})
+    // const values = storageService.query(GOOGLE_KEY)
+    //     .then(books => {
+    //         if (books) return books
+    //     })
+    //     .then(() => {
+
+    //         if (values) return values
+    //     }
+    //     )
+    // console.log(values);
 
     // if (values) return Promise.resolve(values)
 
@@ -146,6 +171,8 @@ function getPrepareData(results) {
     console.log(results);
 
     return results.map((book) => {
+        const imageLinksNew = book.volumeInfo.imageLinks
+        const newThumbnail = imageLinksNew ? imageLinksNew.thumbnail : 'url'
         return {
             id: book.id,
             title: book.volumeInfo.title,
@@ -155,7 +182,7 @@ function getPrepareData(results) {
             description: book.volumeInfo.description,
             pageCount: book.volumeInfo.pageCount,
             categories: book.volumeInfo.categories,
-            // thumbnail: book.volumeInfo.imageLinks.thumbnail || book.volumeInfo.imageLinks.smallThumbnail,
+            thumbnail: newThumbnail,
             language: book.volumeInfo.language,
             listPrice: { amount: 99, currencyCode: "EUR", isOnSale: checkIsSale(book.saleInfo.saleability) }
         }
@@ -190,6 +217,3 @@ function checkIsSale(str) {
 //     }
 //   },
 
-function addGoogleBook(item) {
-
-}
