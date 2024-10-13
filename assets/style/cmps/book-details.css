@@ -39,7 +39,7 @@
     margin-top: 10px;
 }
 
-.sale-tag{
+.sale-tag {
     display: grid;
     align-items: center;
     text-align: center;
@@ -50,53 +50,68 @@
     font-weight: bold;
     color: white;
     font-size: 1em;
-    
+
     width: 6em;
     height: 6em;
     border-radius: 50%;
 
-    top:50px;
-    left:-20px;
+    top: 50px;
+    left: -20px;
 }
 
-.details-second{
+.details-second {
     background-color: var(--clr2-light);
     border-radius: 1em;
     padding: 1em;
 }
 
-.star-review{
+.star-review {
     color: goldenrod;
 }
 
-.review-list td{
+.review-list td {
     padding: 1em;
 }
 
-.review-list thead{
+.review-list thead {
     font-weight: bold;
 }
 
-.review-list table{
+.review-list table {
     background-color: var(--clr2);
     border-radius: 1em;
     margin-bottom: 1em;
 }
 
-.add-review{
+.add-review {
     grid-row: 2;
     grid-column: 1/3;
 }
 
-.add-review form{
+.add-review form {
     display: flex;
     gap: 1em;
     align-items: center;
 }
 
-.form-review{
+.form-review {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
+
+.star-input {
+    cursor: pointer;
+    transition: 100ms;
+}
+
+.star-input:hover {
+    font-weight: 1000;
+    opacity: 0.5;
+}
+
+.chosen-star {
+    font-weight: 1000;
+    color: gold;
+}

@@ -3,6 +3,9 @@ const { Link, NavLink, useParams, useNavigate } = ReactRouterDOM
 const { useState, useEffect } = React
 
 import { bookService } from "../services/book.service.js"
+import { RateBySelect } from "./dynamic-inputs/RateBySelect.jsx"
+import { RateByStars } from "./dynamic-inputs/RateByStars.jsx"
+import { RateByTextbox } from "./dynamic-inputs/RateByTextbox.jsx"
 
 export function AddReview() {
 
@@ -10,6 +13,9 @@ export function AddReview() {
 
     const navigate = useNavigate()
     const { bookId } = useParams()
+    const [cmpType, setCmpType] = useState('')
+    const [chosenNum, setChosenNum] = useState()
+
 
     // useEffect(() => {
     //     if(bookId) loadBook()
@@ -49,7 +55,7 @@ export function AddReview() {
                 showErrorMsg('Problems adding review')
             })
             .finally(() => {
-                navigate(`/book`)
+                // navigate(`/book`)
             })
     }
 
@@ -63,25 +69,31 @@ export function AddReview() {
             <form onSubmit={onAddReview}>
                 <div className="form-review">
                     <div>
-                        <label htmlFor="fullName">Full Name</label>
+                        <label htmlFor="fullName">Full Name </label>
                         <input onChange={handleChange} value={fullName} type="text" name="fullName" id="fullName" />
                     </div>
                     <div>
-                        <label htmlFor="rating">Rating</label>
+                        <section>
+                            <label htmlFor="rating">Rating </label>
+                            <DynamicCmp setReview={setReview} rating={rating} handleChange={handleChange} cmpType={cmpType} />
+                            <section value={cmpType} onChange={(ev) => setCmpType(ev.target.value)}>
+                                <input id="stars" type="radio" value="stars" name="dynamicCmp" />
+                                <label htmlFor="stars">Stars</label>
+                                <input id="select" type="radio" value="select" name="dynamicCmp" />
+                                <label htmlFor="select">Select</label>
+                                <input id="text" type="radio" value="text" name="dynamicCmp" />
+                                <label htmlFor="text">Text</label>
+
+                            </section>
+                            {/* <RateByStars setReview={setReview} rating={rating} handleChange={handleChange} chosenNum={chosenNum} setChosenNum={setChosenNum} /> */}
+                        </section>
+
                         {/* <input onChange={handleChange} value={listPrice.amount} type="number" name="rating" id="rating" /> */}
-                        <select value={rating} onChange={handleChange} name="rating" id="rating">
-                            <option value="">Please choose rating</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
                     </div>
 
 
                     <div>
-                        <label htmlFor="readAt">Reading Date</label>
+                        <label htmlFor="readAt">Reading Date </label>
                         <input onChange={handleChange} value={readAt} type="date" name="readAt" id="readAt" />
                     </div>
                 </div>
@@ -91,4 +103,20 @@ export function AddReview() {
         </div>
 
     )
+
+
+    function DynamicCmp(props) {
+        console.log(props.cmpType)
+        switch (props.cmpType) {
+            case 'stars':
+                // return <RateByStars {...props} />
+                return <RateByStars setReview={setReview} rating={rating} handleChange={handleChange} chosenNum={chosenNum} setChosenNum={setChosenNum} />
+            case 'select':
+                return <RateBySelect {...props} />
+            case 'text':
+                return <RateByTextbox {...props} />
+
+        }
+    }
+
 }

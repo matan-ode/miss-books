@@ -19,8 +19,8 @@ export const bookService = {
     addReview,
     getReviews,
     getGoogleBooks,
-    addGoogleBook
-
+    addGoogleBook,
+    getFilterFromSearchParams
 }
 
 function query(filterBy = {}) {
@@ -168,4 +168,13 @@ function getPrepareData(results) {
 function checkIsSale(str) {
     if (str === 'NOT_FOR_SALE') return false
     else return true
+}
+
+function getFilterFromSearchParams(searchParams) {
+    const title = searchParams.get('title') || ''
+    const minAmount = searchParams.get('minAmount') || ''
+    return {
+        title,
+        minAmount
+    }
 }

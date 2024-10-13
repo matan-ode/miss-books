@@ -84,7 +84,7 @@ export function BookDetails() {
                     </section>
                 </div>
                 <div className="review-add-container">
-                    <AddReview />
+                    <AddReview setBook={setBook} />
                 </div>
                 <br />
                 <ReviewList />
