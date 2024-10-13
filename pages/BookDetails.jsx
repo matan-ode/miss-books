@@ -84,10 +84,10 @@ export function BookDetails() {
                     </section>
                 </div>
                 <div className="review-add-container">
-                    <AddReview setBook={setBook} />
+                    <AddReview setBook={setBook} book={book} />
                 </div>
                 <br />
-                <ReviewList />
+                <ReviewList book={book}/>
             </section>
         </React.Fragment>
     )

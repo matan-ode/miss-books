@@ -7,7 +7,7 @@ import { RateBySelect } from "./dynamic-inputs/RateBySelect.jsx"
 import { RateByStars } from "./dynamic-inputs/RateByStars.jsx"
 import { RateByTextbox } from "./dynamic-inputs/RateByTextbox.jsx"
 
-export function AddReview() {
+export function AddReview({setBook, book}) {
 
     const [review, setReview] = useState({ fullName: '', rating: '', readAt: '' })
 
@@ -50,6 +50,10 @@ export function AddReview() {
         bookService.addReview(bookId, review)
             .then(() => {
                 showSuccessMsg('Review added successfully')
+                if(!book.reviews) book.reviews = []
+                book.reviews.unshift(review)
+
+                setBook({...book})
             })
             .catch(() => {
                 showErrorMsg('Problems adding review')

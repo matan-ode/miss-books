@@ -5,7 +5,7 @@ const { useParams } = ReactRouterDOM
 import { bookService } from "../services/book.service.js"
 
 
-export function ReviewList() {
+export function ReviewList({book}) {
 
     const { bookId } = useParams()
 
@@ -15,7 +15,7 @@ export function ReviewList() {
 
     useEffect(() => {
         loadReviews()
-    }, [])
+    }, [book])
 
     function loadReviews() {
         bookService.getReviews(bookId)
